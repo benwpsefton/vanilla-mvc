@@ -19,7 +19,6 @@ namespace Framework;
 use App\Controllers\ErrorController;
 use Framework\Middleware\Authorise;
 
-
 class Router
 {
 
