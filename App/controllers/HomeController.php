@@ -10,7 +10,7 @@ class HomeController
         $config = require basePath('config/db.php');
         $this->db = new Database($config);
     }
-    public function __index()
+    public function index()
     {
         $products = $this->db->query(
             'SELECT * FROM products ORDER BY created_at DESC LIMIT 6'

@@ -211,7 +211,7 @@ class UserController
 
         redirect('/');
     }
-    
+
     public function logout()
     {
         Session::clearAll();
