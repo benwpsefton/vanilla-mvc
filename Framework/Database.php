@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Database Access Class
  *
@@ -7,10 +6,10 @@
  *
  * Filename:        Database.php
  * Location:        /Framework/
- * Project:         vanilla-mvc
- * Date Created:    01/05/2025
+ * Project:         XXX-SaaS-Vanilla-MVC-YYYY-SN
+ * Date Created:    13/03/2025
  *
- * Author:          ben sefton <20127535@tafe.wa.edu.au>
+ * Author:          Adrian Gould <Adrian.Gould@nmtafe.wa.edu.au>
  *
  */
 
@@ -18,11 +17,22 @@ namespace Framework;
 
 use Exception;
 use PDO;
-use PDOStatement;
 use PDOException;
 
 class Database
 {
+    /**
+     * Define Properties
+     */
+
+    /**
+     * Connection property
+     *
+     * @var PDO
+     */
+    public $conn;
+
+
     /**
      * Constructor for Database class
      *
@@ -31,7 +41,7 @@ class Database
      */
     public function __construct($config)
     {
-        $host =$config['host'];
+        $host = $config['host'];
         $port = $config['port'];
         $dbName = $config['dbname'];
 
@@ -48,6 +58,8 @@ class Database
             throw new Exception("Database connection failed: {$e->getMessage()}");
         }
     }
+
+
     /**
      * Query the database
      *
@@ -83,9 +95,4 @@ class Database
             throw new Exception("Query failed to execute: {$e->getMessage()}");
         }
     }
-}    /**
- * Connection Property
- *
- * @var PDO
- */
-public $conn;
+}
