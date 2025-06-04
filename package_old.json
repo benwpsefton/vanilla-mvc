@@ -1,0 +1,41 @@
+{
+  "name": "vanilla-mvc",
+  "version": "1.0.0",
+  "description": "TailwindCSS V4, plus basic PHP MVC Framework Starter Kit",
+  "main": "index.php",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "vite preview",
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benwpsefton/vanilla-mvc.git"
+  },
+  "keywords": [
+    "tailwindcss",
+    "css",
+    "html5",
+    "nodejs",
+    "php",
+    "mvc",
+    "simple",
+    "traversy-media"
+  ],
+  "author": "ben sefton 20127525@tafe.wa.edu.au",
+  "license": "SEE LICENSE IN Licence.md",
+  "bugs": {
+    "url": "https://github.com/benwpsefton/vanilla-mvc/issues"
+  },
+  "homepage": "https://github.com/benwpsefton/vanilla-mvc#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.8",
+    "@tailwindcss/postcss": "^4.1.8",
+    "@tailwindcss/vite": "^4.1.8",
+    "tailwindcss": "^4.1.8",
+    "vite-plugin-live-reload": "^3.0.4",
+    "vite-plugin-php": "^2.0.3"
+  }
+}
