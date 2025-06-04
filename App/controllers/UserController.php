@@ -1,75 +1,83 @@
 <?php
-
 /**
- * FILE TITLE GOES HERE
+ * User Controller
  *
- * DESCRIPTION OF THE PURPOSE AND USE OF THE CODE
- * MAY BE MORE THAN ONE LINE LONG
- * KEEP LINE LENGTH TO NO MORE THAN 96 CHARACTERS
+ * Provides the Register, Login and Logout capabilities
+ * of the application
  *
- * Filename:        TITLE.php
- * Location:
- * Project:         vanilla-mvc
- * Date Created:    01/05/2025
+ * Filename:        UserController.php
+ * Location:        App/Controllers
+ * Project:         XXX-SaaS-Vanilla-MVC-YYYY-SN
+ * Date Created:    20/08/2024
  *
- * Author:          ben sefton <20127535@tafe.wa.edu.au>
+ * Author:          Adrian Gould <Adrian.Gould@nmtafe.wa.edu.au>
  *
  */
 
-namespace App\controllers;
+namespace App\Controllers;
 
 use Framework\Database;
 use Framework\Session;
 use Framework\Validation;
 
-protected $db;
 class UserController
 {
+
+    /* Properties */
+
+    /**
+     * @var Database
+     */
+    protected $db;
+
+    /**
+     * UserController Constructor
+     *
+     * Instantiate the database connection for use in this class
+     * storing the connection in the protected <code>$db</code>
+     * property.
+     *
+     * @throws \Exception
+     */
     public function __construct()
     {
         $config = require basePath('config/db.php');
         $this->db = new Database($config);
     }
 
+    /**
+     * Show the login page
+     *
+     * @return void
+     */
     public function login()
     {
-        exit('User login not implemented');
+        loadView('users/login');
     }
 
-    public function create()
-    {
-        exit('User registration not implemented');
-    }
-
-    public function store()
-    {
-        exit('User creation not implemented');
-    }
-
-    public function logout()
-    {
-        exit('User logout not implemented');
-    }
-
-    public function authenticate()
-    {
-        exit('User authentication not implemented');
-    }
-
+    /**
+     * Show the register page
+     *
+     * @return void
+     */
     public function create()
     {
         loadView('users/create');
     }
 
+    /**
+     * Store user in database
+     *
+     * @return void
+     */
     public function store()
     {
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $city = $_POST['city'];
-        $state = $_POST['state'];
-        $password = $_POST['password'];
-        $passwordConfirmation = $_POST['password_confirmation'];
-
+        $name = $_POST['name'] ?? null;
+        $email = $_POST['email'] ?? null;
+        $city = $_POST['city'] ?? null;
+        $state = $_POST['state'] ?? null;
+        $password = $_POST['password'] ?? null;
+        $passwordConfirmation = $_POST['password_confirmation'] ?? null;
 
         $errors = [];
 
@@ -87,7 +95,7 @@ class UserController
         }
 
         if (!Validation::match($password, $passwordConfirmation)) {
-            $errors['password_confirmation'] = 'Password and Confirmation do not match';
+            $errors['password_confirmation'] = 'Passwords do not match';
         }
 
         if (!empty($errors)) {
@@ -102,6 +110,7 @@ class UserController
             ]);
             exit;
         }
+
         // Check if email exists
         $params = [
             'email' => $email
@@ -116,6 +125,7 @@ class UserController
             ]);
             exit;
         }
+
         // Create user account
         $params = [
             'name' => $name,
@@ -125,13 +135,11 @@ class UserController
             'password' => password_hash($password, PASSWORD_DEFAULT)
         ];
 
-        $this->db->query(
-            'INSERT INTO users (name, email, city, state, password) 
-    	VALUES (:name, :email, :city, :state, :password)', $params
-        );
+        $this->db->query('INSERT INTO users (name, email, city, state, password) VALUES (:name, :email, :city, :state, :password)', $params);
 
         // Get new user ID
         $userId = $this->db->conn->lastInsertId();
+
         // Set user session
         Session::set('user', [
             'id' => $userId,
@@ -140,14 +148,30 @@ class UserController
             'city' => $city,
             'state' => $state
         ]);
+
         redirect('/');
     }
 
-    public function login()
+    /**
+     * Logout a user and kill session
+     *
+     * @return void
+     */
+    public function logout()
     {
-        loadView('users/login');
+        Session::clearAll();
+
+        $params = session_get_cookie_params();
+        setcookie('PHPSESSID', '', time() - 86400, $params['path'], $params['domain']);
+
+        redirect('/');
     }
 
+    /**
+     * Authenticate a user with email and password
+     *
+     * @return void
+     */
     public function authenticate()
     {
         $email = $_POST['email'];
@@ -172,16 +196,12 @@ class UserController
             exit;
         }
 
-
         // Check for email
         $params = [
             'email' => $email
         ];
 
-        $user = $this->db->query(
-            'SELECT * FROM users WHERE email = :email', $params
-        )->fetch();
-
+        $user = $this->db->query('SELECT * FROM users WHERE email = :email', $params)->fetch();
 
         if (!$user) {
             $errors['email'] = 'Incorrect credentials';
@@ -208,16 +228,6 @@ class UserController
             'city' => $user->city,
             'state' => $user->state
         ]);
-
-        redirect('/');
-    }
-
-    public function logout()
-    {
-        Session::clearAll();
-
-        $params = session_get_cookie_params();
-        setcookie('PHPSESSID', '', time() - 86400, $params['path'], $params['domain']);
 
         redirect('/');
     }

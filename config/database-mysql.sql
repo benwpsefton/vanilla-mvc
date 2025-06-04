@@ -1,13 +1,13 @@
 -- ======================================> BEGIN SECTION <=====================================
 -- BEFORE COMMENCING:
---
--- - Replace all instances of 2025 with the current year
+-- 
+-- - Replace all instances of YYYY with the current year
 --   For example, 2025
--- - Replace all instances of S1 with S followed by the semester number
+-- - Replace all instances of SN with S followed by the semester number
 --   For example, S1 for semester 1
--- - Replace ALL instances of BS with your initials
+-- - Replace ALL instances of XXX with your initials
 --   For example, AJG for Adrian Gould
---
+-- 
 -- We have split the file into sections each surrounded with a BEGIN SECTION and END SECTION
 -- comment line. These sections may be copied and pasted into the SQL interface for the RDBMS
 -- and executed to perform the steps.
@@ -30,9 +30,9 @@
 -- --------------------------------------------------------------------------------------------
 -- Clean up existing database and user(s)
 -- --------------------------------------------------------------------------------------------
-DROP DATABASE IF EXISTS BS_SaaS_FED_2025_S1;
-DROP USER IF EXISTS 'BS_SaaS_FED_2025_S1'@'localhost';
-DROP USER IF EXISTS 'BS_SaaS_FED_2025_S1'@'127.0.0.1';
+DROP DATABASE IF EXISTS XXX_SaaS_FED_YYYY_SN;
+DROP USER IF EXISTS 'XXX_SaaS_FED_YYYY_SN'@'localhost';
+DROP USER IF EXISTS 'XXX_SaaS_FED_YYYY_SN'@'127.0.0.1';
 -- ====================================> END SECTION <=========================================
 
 
@@ -46,36 +46,36 @@ DROP USER IF EXISTS 'BS_SaaS_FED_2025_S1'@'127.0.0.1';
 -- --------------------------------------------------------------------------------------------
 
 -- --------------------------------------------------------------------------------------------
--- Create Database named 'BS_SaaS_FED_2025_S1'
+-- Create Database named 'XXX_SaaS_FED_YYYY_SN'
 -- --------------------------------------------------------------------------------------------
-CREATE DATABASE IF NOT EXISTS BS_SaaS_FED_2025_S1;
+CREATE DATABASE IF NOT EXISTS XXX_SaaS_FED_YYYY_SN;
 
 -- --------------------------------------------------------------------------------------------
 -- Create User & Grant Permissions
 -- We create users that are able to access the database via localhost and 127.0.0.1  just in
 -- case IPv6 is detected. Some RDBMS systems may not be 100% compatible with IPv6 IP addresses.
 -- --------------------------------------------------------------------------------------------
-CREATE USER 'BS_SaaS_FED_2025_S1'@'localhost'
+CREATE USER 'XXX_SaaS_FED_YYYY_SN'@'localhost'
     IDENTIFIED WITH mysql_native_password
         BY 'Password1234';
 
-CREATE USER 'BS_SaaS_FED_2025_S1'@'127.0.0.1'
+CREATE USER 'XXX_SaaS_FED_YYYY_SN'@'127.0.0.1'
     IDENTIFIED WITH mysql_native_password
         BY 'Password1234';
 
 GRANT USAGE ON *.*
-    TO 'BS_SaaS_FED_2025_S1'@'localhost';
+    TO 'XXX_SaaS_FED_YYYY_SN'@'localhost';
 
 GRANT USAGE ON *.*
-    TO 'BS_SaaS_FED_2025_S1'@'127.0.0.1';
+    TO 'XXX_SaaS_FED_YYYY_SN'@'127.0.0.1';
 
 GRANT ALL PRIVILEGES
-    ON `BS_SaaS_FED_2025_S1`.*
-    TO 'BS_SaaS_FED_2025_S1'@'localhost';
+    ON `XXX_SaaS_FED_YYYY_SN`.*
+    TO 'XXX_SaaS_FED_YYYY_SN'@'localhost';
 
 GRANT ALL PRIVILEGES
-    ON `BS_SaaS_FED_2025_S1`.*
-    TO 'BS_SaaS_FED_2025_S1'@'127.0.0.1';
+    ON `XXX_SaaS_FED_YYYY_SN`.*
+    TO 'XXX_SaaS_FED_YYYY_SN'@'127.0.0.1';
 
 -- --------------------------------------------------------------------------------------------
 -- Apply the user's privileges.
@@ -94,19 +94,19 @@ FLUSH PRIVILEGES;
 -- --------------------------------------------------------------------------------------------
 
 -- --------------------------------------------------------------------------------------------
--- Tell MySQL to use the BS_SaaS_FED_2025_S1 database for commands.
+-- Tell MySQL to use the XXX_SaaS_FED_YYYY_SN database for commands.
 -- --------------------------------------------------------------------------------------------
-USE BS_SaaS_FED_2025_S1;
+USE XXX_SaaS_FED_YYYY_SN;
 
 -- --------------------------------------------------------------------------------------------
 -- Remove any existing Users table
 -- --------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `BS_SaaS_FED_2025_S1`.`users`;
+DROP TABLE IF EXISTS `XXX_SaaS_FED_YYYY_SN`.`users`;
 
 -- --------------------------------------------------------------------------------------------
 -- Create the table structure for the 'users' table
 -- --------------------------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BS_SaaS_FED_2025_S1`.`users`
+CREATE TABLE IF NOT EXISTS `XXX_SaaS_FED_YYYY_SN`.`users`
 (
     `id`         int          NOT NULL AUTO_INCREMENT,
     `name`       varchar(255)      DEFAULT NULL,
@@ -116,7 +116,9 @@ CREATE TABLE IF NOT EXISTS `BS_SaaS_FED_2025_S1`.`users`
     `state`      varchar(45)       DEFAULT NULL,
     `country`    varchar(45)       DEFAULT 'Australia',
     `created_at` timestamp    NULL DEFAULT CURRENT_TIMESTAMP,
+
     PRIMARY KEY (`id`)
+
     ) ENGINE = InnoDB
     AUTO_INCREMENT = 7
     DEFAULT CHARSET = utf8mb4
@@ -132,19 +134,19 @@ CREATE TABLE IF NOT EXISTS `BS_SaaS_FED_2025_S1`.`users`
 -- --------------------------------------------------------------------------------------------
 
 -- --------------------------------------------------------------------------------------------
--- Tell MySQL to use the BS_SaaS_FED_2025_S1 database for commands.
+-- Tell MySQL to use the XXX_SaaS_FED_YYYY_SN database for commands.
 -- --------------------------------------------------------------------------------------------
-USE BS_SaaS_FED_2025_S1;
+USE XXX_SaaS_FED_YYYY_SN;
 
 -- --------------------------------------------------------------------------------------------
 -- Remove any existing Products table
 -- --------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `BS_SaaS_FED_2025_S1`.`products`;
+DROP TABLE IF EXISTS `XXX_SaaS_FED_YYYY_SN`.`products`;
 
 -- --------------------------------------------------------------------------------------------
 -- Create the Products table structure
 -- --------------------------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BS_SaaS_FED_2025_S1`.`products`
+CREATE TABLE IF NOT EXISTS `XXX_SaaS_FED_YYYY_SN`.`products`
 (
     `id`          bigint unsigned NOT NULL AUTO_INCREMENT,
     `user_id`     bigint unsigned          DEFAULT 10,
@@ -152,11 +154,73 @@ CREATE TABLE IF NOT EXISTS `BS_SaaS_FED_2025_S1`.`products`
     `description` text,
     `price`       int                      DEFAULT NULL,
     `created_at`  timestamp       NULL     DEFAULT CURRENT_TIMESTAMP,
+
     PRIMARY KEY (`id`)
+
     ) ENGINE = InnoDB
     AUTO_INCREMENT = 21
     DEFAULT CHARSET = utf8mb4
     COLLATE = utf8mb4_general_ci;
+
+-- --------------------------------------------------------------------------------------------
+-- Tell MySQL to use the XXX_SaaS_FED_YYYY_SN database for commands.
+-- --------------------------------------------------------------------------------------------
+USE XXX_SaaS_FED_YYYY_SN;
+
+-- --------------------------------------------------------------------------------------------
+-- Remove any existing Categories table
+-- --------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `XXX_SaaS_FED_YYYY_SN`.`categories`;
+
+-- --------------------------------------------------------------------------------------------
+-- Create the Categories table structure
+-- --------------------------------------------------------------------------------------------
+CREATE TABLE `xxx_php_mvc_jokes_yyyy_sn`.`categories`
+(
+    `id`         BIGINT         UNSIGNED    AUTO_INCREMENT,
+    `name`       VARCHAR(64)    NOT NULL    DEFAULT 'Unknown',
+    `user_id`    BIGINT         UNSIGNED    DEFAULT 10,
+    `created_at` DATETIME       NOT NULL    DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME       NULL        DEFAULT NULL,
+
+    PRIMARY KEY (`id`),
+    UNIQUE `category_name_unique` (`name`)
+
+) ENGINE = InnoDB
+  CHARSET = utf8mb4
+  COLLATE utf8mb4_general_ci;
+
+-- --------------------------------------------------------------------------------------------
+-- Tell MySQL to use the XXX_SaaS_FED_YYYY_SN database for commands.
+-- --------------------------------------------------------------------------------------------
+USE XXX_SaaS_FED_YYYY_SN;
+
+-- --------------------------------------------------------------------------------------------
+-- Remove any existing Jokes table
+-- --------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `XXX_SaaS_FED_YYYY_SN`.`jokes`;
+
+-- --------------------------------------------------------------------------------------------
+-- Create the Jokes table structure
+-- --------------------------------------------------------------------------------------------
+CREATE TABLE `xxx_php_mvc_jokes_yyyy_sn`.`jokes`
+(
+    `id`          BIGINT UNSIGNED AUTO_INCREMENT,
+    `title`       VARCHAR(128) NOT NULL,
+    `body`        TEXT         NOT NULL,
+    `category_id` BIGINT UNSIGNED       DEFAULT 1,
+    `tags`        VARCHAR(255) NULL     DEFAULT NULL,
+    `author_id`   BIGINT UNSIGNED       DEFAULT 1,
+    `created_at`  DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`  DATETIME     NULL     DEFAULT NULL,
+
+    PRIMARY KEY (`id`),
+    FULLTEXT `joke_text` (`body`),
+    FULLTEXT `tag_index` (`tags`)
+
+) ENGINE = InnoDB
+  CHARSET = utf8mb4
+  COLLATE utf8mb4_general_ci;
 -- ====================================> END SECTION <=========================================
 
 
@@ -174,20 +238,20 @@ CREATE TABLE IF NOT EXISTS `BS_SaaS_FED_2025_S1`.`products`
 -- --------------------------------------------------------------------------------------------
 
 -- --------------------------------------------------------------------------------------------
--- Tell MySQL to use the BS_SaaS_FED_2025_S1 database for commands.
+-- Tell MySQL to use the XXX_SaaS_FED_YYYY_SN database for commands.
 -- --------------------------------------------------------------------------------------------
-USE BS_SaaS_FED_2025_S1;
+USE XXX_SaaS_FED_YYYY_SN;
 
 -- --------------------------------------------------------------------------------------------
 -- Seed Users Table
 -- The Password is Password1 hashed using the PHP password_hash() method.
 -- --------------------------------------------------------------------------------------------
-INSERT INTO `BS_SaaS_FED_2025_S1`.`users`
+INSERT INTO `XXX_SaaS_FED_YYYY_SN`.`users`
 VALUES (10, 'Administrator', 'admin@example.com',
         '$2y$10$4Ae3n2iQ0MwXMNz0UEmNne2PaNyfYsBFYb97nayHWTDCwpnuPi6f.',
         'Perth', 'WA', 'Australia', '2000-01-01 00:00:01');
 
-INSERT INTO `BS_SaaS_FED_2025_S1`.`users`
+INSERT INTO `XXX_SaaS_FED_YYYY_SN`.`users`
 VALUES (20, 'Adrian Gould', 'adrian@example.com',
         '$2y$10$4Ae3n2iQ0MwXMNz0UEmNne2PaNyfYsBFYb97nayHWTDCwpnuPi6f.',
         'Perth', 'WA', 'Australia', '2024-01-01 10:30:01'),
@@ -195,7 +259,7 @@ VALUES (20, 'Adrian Gould', 'adrian@example.com',
         '$2y$10$4Ae3n2iQ0MwXMNz0UEmNne2PaNyfYsBFYb97nayHWTDCwpnuPi6f.',
         'Perth', 'WA', 'Australia', '2024-08-10 16:11:43');
 
-INSERT INTO `BS_SaaS_FED_2025_S1`.`users`
+INSERT INTO `XXX_SaaS_FED_YYYY_SN`.`users`
 VALUES (100, 'John Doe', 'user1@example.com',
         '$2y$10$4Ae3n2iQ0MwXMNz0UEmNne2PaNyfYsBFYb97nayHWTDCwpnuPi6f.',
         'Bunbury', 'WA', 'Australia', '2024-08-15 13:04:21'),
@@ -217,7 +281,7 @@ VALUES (100, 'John Doe', 'user1@example.com',
 -- --------------------------------------------------------------------------------------------
 -- Seed Products Table
 -- --------------------------------------------------------------------------------------------
-INSERT INTO `BS_SaaS_FED_2025_S1`.`products`(`id`, `user_id`, `name`, `description`, `price`, `created_at`)
+INSERT INTO `XXX_SaaS_FED_YYYY_SN`.`products`(`id`, `user_id`, `name`, `description`, `price`, `created_at`)
 VALUES (40380, 20, 'Sheep BrickHeadz',
         'BrickHeadz theme: This set features an adorable sheep with a cute, blocky design, perfect for collectors and fans of the BrickHeadz series.',
         1999, '2020-01-01'),
@@ -263,6 +327,55 @@ VALUES (40380, 20, 'Sheep BrickHeadz',
        (885, 101, 'Space Scooter',
         'Space theme: A small, classic LEGO Space set featuring a simple yet iconic space scooter vehicle.', 999,
         '1979-01-01');
+
+
+-- --------------------------------------------------------------------------------------------
+-- Seed Categories Table
+-- --------------------------------------------------------------------------------------------
+
+INSERT INTO `xxx_php_mvc_jokes_yyyy_sn`.`categories`(`id`, `name`, `created_at`)
+VALUES (1, 'unknown', '1970-01-01 00:00:01');
+
+INSERT INTO `xxx_php_mvc_jokes_yyyy_sn`.`categories`(`id`, `name`, `created_at`)
+VALUES (11, 'dad', '1970-01-01 00:00:01');
+
+INSERT INTO `xxx_php_mvc_jokes_yyyy_sn`.`categories`(`id`, `name`, `created_at`)
+VALUES (9, 'geek', '1970-01-01 00:00:02'),
+       (10, 'programmer', '1970-01-01 00:00:02'),
+       (2, 'web', '1970-01-01 00:00:02'),
+       (3, 'knock-knock', '1970-01-01 00:00:03'),
+       (4, 'rude', '1970-01-01 00:00:04'),
+       (5, 'dog', '1970-01-01 00:00:05'),
+       (6, 'cat', '1970-01-01 00:00:06'),
+       (7, 'halloween', '1970-01-01 00:00:07'),
+       (8, 'animal', '1970-01-01 00:00:08');
+
+
+-- --------------------------------------------------------------------------------------------
+-- Seed Jokes Table
+-- --------------------------------------------------------------------------------------------
+
+INSERT INTO `xxx_php_mvc_jokes_yyyy_sn`.`jokes`(`id`, `title`, `body`, `category_id`, `tags`,
+                                                `author_id`, `created_at`, `updated_at`)
+VALUES (1, 'Skeleton Fight',
+        '&lt;p&gt;Why don\'t skeletons fight each other?&lt;/p&gt;&lt;p&gt;They don\'t have the guts.&lt;/p&gt;',
+        7, 'spooky,funny', 1, now(), null),
+       (2, 'Parallel Lines',
+        '&lt;p&gt;Parallel lines have so much in common.&lt;/p&gt;&lt;p&gt;It\'s a shame they\'ll never meet.&lt;/p&gt;',
+        9, 'geometry,puns', 105, now(), null),
+       (3, 'Embracing Mistakes',
+        '&lt;p&gt;I told my wife she should embrace her mistakes.&lt;/p&gt;&lt;p&gt;She gave me a hug.&lt;/p&gt;',
+        11, 'relationships,dad jokes', 104, now(), null),
+       (4, 'Broken Pencil',
+        '&lt;p&gt;I was going to tell a joke about a broken pencil, but it was pointless.&lt;/p&gt;',
+        11, 'puns,funny', 103, now(), null),
+       (5, 'Light Sleeper',
+        '&lt;p&gt;I told my wife she should stop sleeping in the fridge.&lt;/p&gt;&lt;p&gt;She said she\'s just a light sleeper.&lt;/p&gt;',
+        11, 'sleep,puns', 105, now(), null),
+       (6, 'Elevator Business',
+        '&lt;p&gt;I\'m thinking of starting a business installing elevators.&lt;/p&gt;&lt;p&gt;I hear it has its ups and downs.&lt;/p&gt;',
+        11, 'work,puns', 104, now(), null);
+
 -- ====================================> END SECTION <=========================================
 
 

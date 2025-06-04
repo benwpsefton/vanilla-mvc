@@ -1,47 +1,75 @@
 <?php
-
 /**
- * FILE TITLE GOES HERE
+ * Validation class
  *
- * DESCRIPTION OF THE PURPOSE AND USE OF THE CODE
- * MAY BE MORE THAN ONE LINE LONG
- * KEEP LINE LENGTH TO NO MORE THAN 96 CHARACTERS
+ * Provides basic validation of data including
+ * - string
+ * - email
+ * - match two items of data
  *
- * Filename:        TITLE.php
+ * Filename:        Validation.php
  * Location:
- * Project:         vanilla-mvc
- * Date Created:    01/05/2025
+ * Project:         XXX-SaaS-Vanilla-MVC-YYYY-SN
+ * Date Created:    20/08/2024
  *
- * Author:          ben sefton <20127535@tafe.wa.edu.au>
+ * Author:          Adrian Gould <Adrian.Gould@nmtafe.wa.edu.au>
  *
  */
 
 namespace Framework;
 
-
 class Validation
 {
-    public static function string($value, $min = 1, $max = INF)
+    /**
+     * Validate a string
+     *
+     * @param $value
+     * @param int $min
+     * @param float|int $max
+     * @return bool
+     */
+    public static function string($value, int $min = 1, float|int $max = INF): bool
     {
         if (is_string($value)) {
             $value = trim($value);
             $length = strlen($value);
-            return $length >= $min && $length <= $max;
+            return $length >= $min && $length <= floor($max);
         }
 
         return false;
     }
-    public static function email($value)
+
+
+    /**
+     * Validate email address
+     *
+     * Uses teh PHP filter_var function with the FILTER_VALIDATE_EMAIL
+     * option. It is a bare essentials test that the email contains
+     * the correct parts (MAILBOX@FQDN)
+     *
+     * @param string $value
+     * @return mixed
+     */
+    public static function email(string $value): mixed
     {
         $value = trim($value);
 
         return filter_var($value, FILTER_VALIDATE_EMAIL);
     }
-    public static function match($value1, $value2)
+
+
+    /**
+     * Match a value against another
+     * @param $value1
+     * @param $value2
+     * @return bool
+     */
+    public static function match($value1, $value2): bool
     {
         $value1 = trim($value1);
         $value = trim($value2);
 
         return $value1 === $value2;
     }
+
 }

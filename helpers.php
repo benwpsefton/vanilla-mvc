@@ -1,46 +1,51 @@
-<?php  
-/**  
- * Helper Functions 
- * 
- * Filename:        helpers.php 
+<?php
+/**
+ * Helper Functions
+ *
+ * Filename:        helpers.php
  * Location:        /
- * Project:         XXX-SaaS-Vanilla-MVC-SN 
- * Date Created:    DATE_CREATED 
- * 
- * Author:          YOUR NAME  
- * 
+ * Project:         XXX-SaaS-Vanilla-MVC-YYYY-SN
+ * Date Created:    13/03/2025
+ *
+ * Author:          Adrian Gould <Adrian.Gould@nmtafe.wa.edu.au>
+ *
  */
 
-/**  
- * Get the base path 
- * 
- * BasePath function to provide accurate paths to files 
- * 
- * @param string $path  
- * @return string  
+use League\CommonMark\CommonMarkConverter;
+use League\HTMLToMarkdown\HtmlConverter;
+
+/**
+ * Get the base path
+ *
+ * BasePath function to provide accurate paths to files
+ *
+ * @param string $path
+ * @return string
  */
-function basePath($path = '')  
-{  
-    return __DIR__ . '/' . $path;  
+function basePath($path = '')
+{
+    return __DIR__ . '/' . $path;
 }
 
-/**  
- * Load a view 
- * 
- * @param string $name  
- * @return void  
+
+/**
+ * Load a view
+ *
+ * @param string $name
+ * @return void
  */
-function loadView($name, $data = [])  
-{  
-    $viewPath = basePath("App/views/{$name}.view.php");  
-  
-    if (file_exists($viewPath)) {  
-        extract($data);  
-        require $viewPath;  
-    } else {  
-        echo "View '{$name} not found!'";  
-    }  
+function loadView($name, $data = [])
+{
+    $viewPath = basePath("App/views/{$name}.view.php");
+
+    if (file_exists($viewPath)) {
+        extract($data);
+        require $viewPath;
+    } else {
+        echo "View '{$name} not found!'";
+    }
 }
+
 
 /**
  * Load a partial
@@ -60,6 +65,8 @@ function loadPartial($name, $data = [])
         echo "Partial '{$name} not found!'";
     }
 }
+
+
 /**
  * Inspect a value(s)
  *
@@ -70,24 +77,25 @@ function inspect($value)
 {
     echo '<pre>';
     var_dump($value);
+    /**
+     * Inspect a value(s) and die
+     *
+     * @param mixed $value
+     * @return void
+     */
+    function inspectAndDie($value)
+    {
+        inspect($value);
+        die();
+    }
+
     echo '</pre>';
 }
 
-/**
- * Inspect a value(s) and die
- *
- * @param mixed $value
- * @return void
- */
-function inspectAndDie($value)
-{
-    inspect($value);
-    die();
-}
 
 /**
  * Dump the values of one or more variables, objects or similar.
- * 
+ *
  * @return void
  */
 function dump(): void
@@ -99,9 +107,10 @@ function dump(): void
     echo "</pre>";
 }
 
+
 /**
  * Dump the values of one or more variables, objects or similar, then terminate the script.
- * 
+ *
  * @return void
  */
 function dd(): void
@@ -113,6 +122,8 @@ function dd(): void
     echo "</pre>";
     die();
 }
+
+
 /**
  * Sanitize Data
  *
@@ -124,6 +135,7 @@ function sanitize($dirty)
     return filter_var(trim($dirty), FILTER_SANITIZE_SPECIAL_CHARS);
 }
 
+
 /**
  * Redirect to a given url
  *
@@ -134,4 +146,41 @@ function redirect($url)
 {
     header("Location: {$url}");
     exit;
+}
+
+
+/**
+ * Convert HTML to Markdown
+ *
+ * @param string $html HTML content to convert
+ * @return string Markdown content
+ */
+if (!function_exists('htmlToMarkdown')) {
+    function htmlToMarkdown($html) {
+        $converter = new HtmlConverter([
+            'header_style' => 'atx', // This ensures # style headers
+            'strip_tags' => false,
+            'remove_nodes' => 'script style',
+        ]);
+        return $converter->convert($html);
+    }
+}
+
+
+/**
+ * Convert Markdown to HTML
+ *
+ * @param string $markdown Markdown content to convert
+ * @return string HTML content
+ */
+if (!function_exists('markdownToHtml')) {
+    function markdownToHtml($markdown) {
+        $config = [
+            'html_input' => 'allow', // this ensures our font colours are displayed in the submissions view
+            'allow_unsafe_links' => false,
+        ];
+
+        $converter = new GithubFlavoredMarkdownConverter($config);
+        return $converter->convert($markdown);
+    }
 }

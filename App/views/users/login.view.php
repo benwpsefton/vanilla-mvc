@@ -1,5 +1,4 @@
 <?php
-
 /**
  * FILE TITLE GOES HERE
  *
@@ -7,12 +6,12 @@
  * MAY BE MORE THAN ONE LINE LONG
  * KEEP LINE LENGTH TO NO MORE THAN 96 CHARACTERS
  *
- * Filename:        TITLE.php
- * Location:
- * Project:         vanilla-mvc
- * Date Created:    01/05/2025
+ * Filename:        login.view.php
+ * Location:        ${FILE_LOCATION}
+ * Project:         XXX-SaaS-Vanilla-MVC-YYYY-SN
+ * Date Created:    23/08/2024
  *
- * Author:          ben sefton <20127535@tafe.wa.edu.au>
+ * Author:          Adrian Gould <Adrian.Gould@nmtafe.wa.edu.au>
  *
  */
 
@@ -52,17 +51,17 @@ loadPartial('navigation'); ?>
                 <section class="mb-4">
 
                     <button type="submit"
-                            class="w-full bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded
-                   focus:outline-none transition ease-in-out duration-500">
+                            class="w-full bg-prussianblue-500 hover:bg-prussianblue-600 text-white px-4 py-2 rounded
+                                   focus:outline-none transition ease-in-out duration-500">
                         Login
                     </button>
                 </section>
 
                 <section class="mb-4">
-                    <p class="mt-4 text-zinc-700">
+                    <p class="mt-8 text-zinc-700">
                         So you are not a member...
-                        <a class="bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded
-                   focus:outline-none transition ease-in-out duration-500"
+                        <a class="bg-prussianblue-900 hover:bg-prussianblue-600 text-white px-1 pb-1 rounded
+                              transition ease-in-out duration-500"
                            href="/auth/register">Register</a> now!
                     </p>
                 </section>
@@ -71,5 +70,7 @@ loadPartial('navigation'); ?>
 
         </section>
     </main>
+
 <?php
 loadPartial('footer');
+

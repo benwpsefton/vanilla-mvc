@@ -1,21 +1,15 @@
 <?php
-
 /**
- * FILE TITLE GOES HERE
+ * HTML Template using TailwindCSS
  *
- * DESCRIPTION OF THE PURPOSE AND USE OF THE CODE
- * MAY BE MORE THAN ONE LINE LONG
- * KEEP LINE LENGTH TO NO MORE THAN 96 CHARACTERS
+ * Filename:        template.php
+ * Location:        public
+ * Project:         XXX-SaaS-Vanilla-MVC-SN
+ * Date Created:    2025-03-13
  *
- * Filename:        TITLE.php
- * Location:
- * Project:         vanilla-mvc
- * Date Created:    01/05/2025
- *
- * Author:          ben sefton <20127535@tafe.wa.edu.au>
+ * Author:          Adrian Gould <Adrian.Gould@nmtafe.wa.edu.au>
  *
  */
-
 ?>
 
 <!doctype html>
@@ -23,14 +17,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Document</title>
+    <title>XXX Simple MVC Demo</title>
 
     <!-- During DEVELOPMENT the src/source.css file is used -->
-    <link rel="stylesheet" href="./src/source.css">
-    <!-- For production the assets/css/site.css file will be used -->
+    <link rel="stylesheet" href="../src/source.css">
+    <!-- For production the css/site.css file will be used -->
+    <link rel="stylesheet" href="/assets/css/site.css">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="./assets/css/all.css">
+    <link rel="stylesheet" href="/assets/css/all.css">
 
 </head>
 <body class="bg-white flex flex-col h-screen justify-between">

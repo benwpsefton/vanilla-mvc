@@ -1,5 +1,4 @@
 <?php
-
 /**
  * FILE TITLE GOES HERE
  *
@@ -7,12 +6,12 @@
  * MAY BE MORE THAN ONE LINE LONG
  * KEEP LINE LENGTH TO NO MORE THAN 96 CHARACTERS
  *
- * Filename:        TITLE.php
+ * Filename:        Authorisation.php
  * Location:
- * Project:         vanilla-mvc
- * Date Created:    01/05/2025
+ * Project:         XXX-SaaS-Vanilla-MVC-YYYY-SN
+ * Date Created:    20/08/2024
  *
- * Author:          ben sefton <20127535@tafe.wa.edu.au>
+ * Author:          Adrian Gould <Adrian.Gould@nmtafe.wa.edu.au>
  *
  */
 
@@ -20,7 +19,13 @@ namespace Framework;
 
 class Authorisation
 {
-    public static function isOwner($resourceId)
+    /**
+     * Check if current logged-in user owns a resource
+     *
+     * @param int $resourceId
+     * @return bool
+     */
+    public static function isOwner(int $resourceId): bool
     {
         $sessionUser = Session::get('user');
 

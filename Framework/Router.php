@@ -1,5 +1,4 @@
 <?php
-
 /**
  * FILE TITLE GOES HERE
  *
@@ -7,27 +6,122 @@
  * MAY BE MORE THAN ONE LINE LONG
  * KEEP LINE LENGTH TO NO MORE THAN 96 CHARACTERS
  *
- * Filename:        TITLE.php
- * Location:
- * Project:         vanilla-mvc
- * Date Created:    01/05/2025
+ * Filename:        Router.php
+ * Location:        /Framework
+ * Project:         XXX-SaaS-Vanilla-MVC-YYYY-SN
+ * Date Created:    13/03/2025
  *
- * Author:          ben sefton <20127535@tafe.wa.edu.au>
+ * Author:          Adrian Gould <Adrian.Gould@nmtafe.wa.edu.au>
  *
  */
 
 namespace Framework;
 
-protected $routes = [];
-
 use App\Controllers\ErrorController;
 use Framework\Middleware\Authorise;
 
-
 class Router
 {
+    /**
+     * Define properties
+     */
 
-    /** Other methods have been removed for brevity **/
+    /**
+     * Routes property
+     *
+     * @var array
+     */
+    protected $routes = [];
+
+
+    /**
+     * Add a new route
+     *
+     * Adds a GET|POST|PUT|DELETE route to the $routes array.
+     *
+     * Use:
+     * <code>
+     *     $this->registerRoute("METHOD", $uri, $action, $Middleware)
+     * </code>
+     *
+     * @param string $method
+     * @param string $uri
+     * @param string $action
+     * @param array $middleware
+     *
+     * @return void
+     */
+    public function registerRoute($method, $uri, $action, $middleware = [])
+    {
+        list($controller, $controllerMethod) = explode('@', $action);
+
+        $this->routes[] = [
+            'method' => $method,
+            'uri' => $uri,
+            'controller' => $controller,
+            'controllerMethod' => $controllerMethod,
+            'Middleware' => $middleware
+        ];
+    }
+
+
+    /**
+     * Add a GET route
+     *
+     * @param string $uri
+     * @param string $controller
+     * @param array $middleware
+     * @return void
+     */
+    public function get($uri, $controller, $middleware = [])
+    {
+        $this->registerRoute('GET', $uri, $controller, $middleware);
+    }
+
+
+    /**
+     * Add a POST route
+     *
+     * @param string $uri
+     * @param string $controller
+     * @param array $middleware
+     *
+     * @return void
+     */
+    public function post($uri, $controller, $middleware = [])
+    {
+        $this->registerRoute('POST', $uri, $controller, $middleware);
+    }
+
+
+    /**
+     * Add a PUT route
+     *
+     * @param string $uri
+     * @param string $controller
+     * @param array $middleware
+     *
+     * @return void
+     */
+    public function put($uri, $controller, $middleware = [])
+    {
+        $this->registerRoute('PUT', $uri, $controller, $middleware);
+    }
+
+
+    /**
+     * Add a DELETE route
+     *
+     * @param string $uri
+     * @param string $controller
+     * @param array $middleware
+     *
+     * @return void
+     */
+    public function delete($uri, $controller, $middleware = [])
+    {
+        $this->registerRoute('DELETE', $uri, $controller, $middleware);
+    }
 
 
     /**
@@ -94,4 +188,5 @@ class Router
 
         ErrorController::notFound();
     }
+
 }

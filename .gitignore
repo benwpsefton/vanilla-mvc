@@ -262,5 +262,6 @@ node_modules/
 # Composer and Vendor folders
 composer.phar
 /vendor/
-/vendor/**/*
 composer.lock
+
+

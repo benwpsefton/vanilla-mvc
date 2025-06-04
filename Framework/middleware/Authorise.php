@@ -1,5 +1,4 @@
 <?php
-
 /**
  * FILE TITLE GOES HERE
  *
@@ -7,23 +6,27 @@
  * MAY BE MORE THAN ONE LINE LONG
  * KEEP LINE LENGTH TO NO MORE THAN 96 CHARACTERS
  *
- * Filename:        TITLE.php
+ * Filename:        Authorise.php
  * Location:
- * Project:         vanilla-mvc
- * Date Created:    01/05/2025
+ * Project:         XXX-SaaS-Vanilla-MVC-YYYY-SN
+ * Date Created:    20/08/2024
  *
- * Author:          ben sefton <20127535@tafe.wa.edu.au>
+ * Author:          Adrian Gould <Adrian.Gould@nmtafe.wa.edu.au>
  *
  */
 
 namespace Framework\middleware;
 
+use Framework\Session;
+
 class Authorise
 {
-    public function isAuthenticated()
-    {
-        return Session::has('user');
-    }
+    /**
+     * Handle the user's request
+     *
+     * @param string $role
+     * @return bool
+     */
     public function handle($role)
     {
         if ($role === 'guest' && $this->isAuthenticated()) {
@@ -33,5 +36,17 @@ class Authorise
         if ($role === 'auth' && !$this->isAuthenticated()) {
             return redirect('/auth/login');
         }
+        return false;
+    }
+
+
+    /**
+     * Check if user is authenticated
+     *
+     * @return bool
+     */
+    public function isAuthenticated()
+    {
+        return Session::has('user');
     }
 }

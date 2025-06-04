@@ -1,28 +1,27 @@
 <?php
-
 /**
- * FILE TITLE GOES HERE
+ * Register User View
  *
- * DESCRIPTION OF THE PURPOSE AND USE OF THE CODE
- * MAY BE MORE THAN ONE LINE LONG
- * KEEP LINE LENGTH TO NO MORE THAN 96 CHARACTERS
+ * Filename:        create.view.php
+ * Location:        App/views/users
+ * Project:         XXX-SaaS-Vanilla-MVC-YYYY-SN
+ * Date Created:    23/08/2024
  *
- * Filename:        TITLE.php
- * Location:
- * Project:         vanilla-mvc
- * Date Created:    01/05/2025
- *
- * Author:          ben sefton <20127535@tafe.wa.edu.au>
+ * Author:          Adrian Gould <Adrian.Gould@nmtafe.wa.edu.au>
  *
  */
 
 loadPartial('header');
-loadPartial('navigation');
-?>
+loadPartial('navigation'); ?>
 
-    <main class="flex justify-center items-center mt-20">
-        <section class="bg-white p-8 rounded-lg shadow-md w-1/2 md:w-500 mx-6">
-            <h2 class="text-4xl text-left font-bold mb-4">Register</h2>
+    <main class="container mx-auto bg-zinc-50 py-8 px-4 shadow shadow-black/25 rounded-b-lg
+                 flex justify-center items-center mt-8 w-1/2 ">
+
+        <section class="bg-white p-8 rounded-lg shadow-md md:w-500 mx-6 w-full">
+
+            <h2 class="text-4xl text-left font-bold mb-4">
+                Register
+            </h2>
 
             <?= loadPartial('errors', [
                 'errors' => $errors ?? []
@@ -37,6 +36,7 @@ loadPartial('navigation');
                            class="w-full px-4 py-2 border border-b-zinc-300 rounded focus:outline-none"
                            value="<?= $user['name'] ?? '' ?>"/>
                 </section>
+
                 <section class="mb-4">
                     <label for="Email" class="mt-4 pb-1">Email:</label>
                     <input type="email" id="Email"
@@ -44,6 +44,7 @@ loadPartial('navigation');
                            class="w-full px-4 py-2 border border-b-zinc-300 rounded focus:outline-none"
                            value="<?= $user['email'] ?? '' ?>"/>
                 </section>
+
                 <section class="mb-4">
                     <label for="City" class="mt-4 pb-1">City:</label>
                     <input type="text" id="City"
@@ -51,6 +52,7 @@ loadPartial('navigation');
                            class="w-full px-4 py-2 border border-b-zinc-300 rounded focus:outline-none"
                            value="<?= $user['city'] ?? '' ?>"/>
                 </section>
+
                 <section class="mb-4">
                     <label for="State" class="mt-4 pb-1">State:</label>
                     <input type="text" id="State"
@@ -58,31 +60,37 @@ loadPartial('navigation');
                            class="w-full px-4 py-2 border border-b-zinc-300 rounded focus:outline-none"
                            value="<?= $user['state'] ?? '' ?>"/>
                 </section>
+
                 <section class="mb-4">
                     <label for="Password" class="mt-4 pb-1">Password:</label>
                     <input type="password" id="Password"
                            name="password" placeholder="Password"
                            class="w-full px-4 py-2 border border-b-zinc-300 rounded focus:outline-none"/>
                 </section>
+
                 <section class="mb-4">
                     <label for="PasswordConfirmation" class="mt-4 pb-1">Confirm password:</label>
                     <input type="password" id="PasswordConfirmation"
                            name="password_confirmation" placeholder="Confirm Password"
                            class="w-full px-4 py-2 border border-b-zinc-300 rounded focus:outline-none"/>
                 </section>
+
                 <section class="mb-4">
                     <button type="submit"
-                            class="w-full bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded focus:outline-none
-               transition ease-in-out duration-500">
+                            class="w-full bg-prussianblue-500 hover:bg-prussianblue-600 text-white px-4 py-2 rounded focus:outline-none
+                               transition ease-in-out duration-500">
                         Register
                     </button>
                 </section>
+
                 <section class="mb-4">
                     <p class="mt-8 text-zinc-700">
                         Already have an account?
-                        <a class="bg-sky-900 hover:bg-sky-600 text-white px-1 pb-1 rounded
-              transition ease-in-out duration-500" href="/auth/login">Login</a>
-                    </p></section>
+                        <a class="bg-prussianblue-900 hover:bg-prussianblue-600 text-white px-1 pb-1 rounded
+                              transition ease-in-out duration-500" href="/auth/login">Login</a>
+                    </p>
+                </section>
+
             </form>
         </section>
     </main>

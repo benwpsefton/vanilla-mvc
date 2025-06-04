@@ -3,15 +3,15 @@
  *
  * Filename:        vite.config.js
  * Location:        /
- * Project:         vanilla-mvc
- * Date Created:    01/05/2025
+ * Project:         XXX-SaaS-Vanilla-MVC-YYYY-SN
+ * Date Created:    2025-03-13
  *
- * Author:          ben sefton <20127535@tafe.wa.edu.au>
+ * Author:          Adrian Gould <adrian.gould@nmtafe.wa.edu.au>
  */
 
 import {defineConfig} from 'vite'
 import tailwindcss from '@tailwindcss/vite'
-import usePHP from 'vite-plugin-php';
+import usePHP from 'vite-plugin-php'
 import liveReload from 'vite-plugin-live-reload'
 
 export default defineConfig({
@@ -20,12 +20,14 @@ export default defineConfig({
         usePHP({
             entry: [
                 'index.php',
+                'template.php',
                 'public/index.{html,php,js}',
                 'App/views/**/*.{html,php,js}'
             ],
         }),
         liveReload([
                 'index.php',
+                'template.php',
                 'public/index.{html,php,js}',
                 'App/views/**/*.{html,php,js}'
             ],
@@ -33,5 +35,5 @@ export default defineConfig({
                 alwaysReload: true
             }
         ),
-    ],
-})
+    ]
+}) ;
